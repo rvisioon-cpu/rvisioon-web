@@ -1,0 +1,38 @@
+/* Project families: shared navigation and dedicated editorial landings. */
+#nav .project-menu{position:relative;border:0;padding:0;margin:0;line-height:1.6}
+#nav .project-menu summary{list-style:none;display:flex;gap:9px;align-items:center;padding:10px 0;font:inherit;cursor:pointer}
+#nav .project-menu summary::-webkit-details-marker{display:none}
+#nav .project-submenu{position:absolute;top:100%;left:-20px;width:215px;padding:12px;background:#201726;border:1px solid #685373;border-radius:10px;box-shadow:0 15px 35px #0003;z-index:50}
+#nav .project-submenu a{display:flex;justify-content:space-between;padding:12px;border-radius:5px}
+#nav .project-submenu a:hover,#nav .project-submenu a[aria-current]{background:#ffffff12;color:#dfbdf5}
+#nav .project-menu[open] summary{color:#ceace6}
+.whatsapp-dock.sticky-contact{background:none;border:0;box-shadow:none;backdrop-filter:none;gap:10px}
+.whatsapp-dock .whatsapp-float{display:grid;place-items:center;width:58px;height:58px;padding:14px;background:#168b50;border:1px solid #ffffff75;border-radius:50%;box-shadow:0 5px 22px #0003;color:white;transition:transform .2s,background .2s}
+.whatsapp-float svg{width:100%;height:100%}.whatsapp-dock .whatsapp-float:hover{transform:translateY(-3px);background:#107b43}
+.whatsapp-dock.sticky-contact button{background:#211529e8;width:38px;height:38px;border:1px solid #b291c250}
+body:has(.vr-journey.is-in-view) .whatsapp-dock{visibility:visible;pointer-events:auto}
+/* A compact sticky stage; no extra full-screen tail after the final card. */
+#proyectos .project-scroll{margin-right:0}
+#proyectos .project-pin{height:auto;min-height:0;top:24px;padding:0 0 8px;justify-content:flex-start}
+#proyectos .project-toolbar{margin-right:0}
+#proyectos .projects{padding-right:0}
+#proyectos .project,#proyectos .project:nth-child(even){height:clamp(340px,55svh,550px);padding-top:0}
+#proyectos .project img{object-position:center;filter:none}
+#proyectos .clients{margin-top:32px!important;padding-top:28px}
+#proyectos .project-pin>.clients{width:100%;flex-shrink:0;padding-bottom:8px}
+.paused #proyectos .project-pin{top:0}
+.category-hero{position:relative;min-height:650px;min-height:min(780px,90svh);display:flex;align-items:end;background:#141019;color:#fff;isolation:isolate;padding:100px 6% 85px;overflow:hidden}
+.category-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;animation:category-enter 1.2s ease both}
+.verticales .category-hero>img{object-position:center 55%}.horizontales .category-hero>img{object-position:center 48%}
+.category-hero:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#100b18d9,#100b1840),linear-gradient(0deg,#100b18b0,transparent 65%)}
+.category-hero-copy{max-width:1080px}.category-hero h1{font-size:clamp(44px,6vw,92px);line-height:1.04}.category-hero em{color:#dab6ed}.category-hero p:not(.eyebrow){max-width:530px;font-size:16px;color:#eee5f4;margin:28px 0}.category-hero .eyebrow{color:#e4c7f5}.category-credit{position:absolute;bottom:22px;right:6%;font-size:9px;letter-spacing:.14em}
+.category-switch{display:flex;gap:35px;padding:22px 6%;border-bottom:1px solid #d8ccdf;background:var(--paper)}.category-switch a{font-size:14px;padding:8px 0;border-bottom:2px solid transparent}.category-switch a[aria-current]{color:var(--purple);border-color:var(--purple)}
+.category-story .section-head{display:grid;grid-template-columns:1.4fr 1fr;column-gap:8%;align-items:end}.category-story .section-head .eyebrow{grid-column:1/-1}.category-story .section-head>p:last-child{margin-bottom:0}.category-story h2{font-size:clamp(35px,4.3vw,65px)}
+.category-story-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:7%;align-items:center}.category-options{display:flex;flex-direction:column;gap:0;margin-bottom:32px}.category-options button{display:flex;justify-content:space-between;gap:12px;text-align:left;border:0;border-bottom:1px solid #d4c5dd;background:transparent;padding:20px 12px;font-size:16px;color:#756482;min-height:56px}.category-options button[aria-pressed=true]{background:#eae1ef;color:#713c97;border-left:3px solid #713c97}.category-options button:hover{color:#713c97}
+#category-panel h3{font-size:30px}#category-panel p{color:#756482;font-size:15px;line-height:1.8}.category-story-layout figure{margin:0}.category-story-layout figure img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#eae1ef}.category-story-layout figcaption{font-size:11px;color:#756482;margin-top:14px}.category-story-layout figure.scene-changed img{animation:category-enter .5s ease}
+.project-category .collection{padding-top:35px}.project-category .collection-bar{align-items:center}.project-category .collection-bar>p:last-child{color:#756482;font-size:14px}.project-category .case h2{line-height:1.15}.category-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:30px}
+.category-gateways{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 6% 85px}.category-gateways>a{position:relative;min-height:550px;overflow:hidden;border-radius:8px;color:white;display:flex;align-items:end;isolation:isolate}.category-gateways img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s}.category-gateways a:hover img{transform:scale(1.04)}.category-gateways a:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#141019ee,transparent 85%);z-index:-1}.category-gateways a>div{padding:38px}.category-gateways h2{font-size:clamp(35px,3.5vw,55px)}.category-gateways p:last-child{color:#ddd0e5;font-size:15px}.category-gateways .eyebrow{font-size:10px}
+@keyframes category-enter{from{opacity:.6;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+@media(max-width:1000px){#nav .project-submenu{position:static;width:100%;box-shadow:none;border:0;border-left:1px solid #8d699f;border-radius:0;margin:8px 0;padding:0 10px}#nav .project-menu summary{min-height:44px}header nav.open{z-index:60}#nav .project-menu{width:100%}.category-story .section-head{display:block}}
+@media(max-width:760px){.whatsapp-dock .whatsapp-float{width:52px;height:52px;padding:13px}.whatsapp-dock.sticky-contact{bottom:calc(12px + env(safe-area-inset-bottom));right:14px}.category-hero{min-height:610px;padding:75px 6% 80px}.category-hero h1{font-size:clamp(39px,10vw,60px)}.category-hero p:not(.eyebrow){font-size:15px}.category-credit{font-size:8px;left:6%;right:6%}.category-switch{gap:28px}.category-story-layout{grid-template-columns:1fr;gap:25px}.category-options button{padding:17px 12px}.category-story .section-head{margin-bottom:30px}.category-story-layout figure{grid-row:1}.category-story-layout figure img{aspect-ratio:4/3}.category-story h2{font-size:36px}.category-gateways{grid-template-columns:1fr}.category-gateways>a{min-height:440px}.category-gateways a>div{padding:27px}.category-actions{align-items:start;flex-direction:column;gap:14px}#proyectos .project-pin{position:relative;top:auto}#proyectos .project-scroll{height:auto!important}#proyectos .projects{scroll-snap-type:x mandatory}#proyectos .project{scroll-snap-align:start}#proyectos .project,#proyectos .project:nth-child(even){height:420px;max-height:65svh}.project-category .collection-bar{align-items:start;flex-direction:column}.project-category .case-grid{gap:40px}}
+@media(prefers-reduced-motion:reduce){.category-hero>img,.category-story-layout figure.scene-changed img{animation:none}.category-gateways img,.whatsapp-float{transition:none}}

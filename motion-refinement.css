@@ -27,3 +27,65 @@
 #coleccion{overflow-x:clip}
 
 #proyectos{overflow-x:clip}
+
+/* One continuous device morph, with a crossfade between preloaded captures. */
+.showcase .show-image[data-device] .scene-device{
+ transform:none;transform-style:flat;
+ transition:padding .52s cubic-bezier(.22,.61,.36,1),border-radius .52s cubic-bezier(.22,.61,.36,1);
+}
+.showcase .show-image[data-device] .scene-device img{
+ transform:none;filter:none;transition:border-radius .52s;backface-visibility:hidden;
+}
+.showcase .show-image[data-device] .scene-device:before{transition:width .52s,height .52s,left .52s,top .52s,border-radius .52s}
+.showcase .show-image[data-device] .scene-device:after{
+ display:block;width:30%;height:45px;left:35%;right:auto;top:auto;bottom:-45px;
+ border-radius:0;clip-path:polygon(32% 0,68% 0,73% 86%,100% 94%,100% 100%,0 100%,0 94%,27% 86%);
+ background:linear-gradient(90deg,#9a91a5,#d0c9d6,#9a91a5);transform-origin:top;
+ transition:opacity .4s,transform .52s;opacity:0;transform:scaleY(.7);
+}
+.showcase .show-image[data-device=building] .scene-device:after{opacity:1;transform:scaleY(1)}
+body.paused .showcase .show-image[data-device] .scene-device,
+body.paused .showcase .show-image[data-device] .scene-device *{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){
+ .showcase .show-image[data-device] .scene-device,
+ .showcase .show-image[data-device] .scene-device img,
+ .showcase .show-image[data-device] .scene-device:before,
+ .showcase .show-image[data-device] .scene-device:after{transition:none}
+}
+
+/* Mobile VR keeps the same scroll-led reveal as desktop, with room for its copy. */
+@media(max-width:760px){
+ .vr-journey{height:230svh!important;overflow:clip}
+ .vr-pin{position:sticky!important;top:0;height:100svh!important;min-height:680px!important;overflow:hidden}
+ .vr-visual{position:absolute;inset:0;width:100%;height:100%;max-height:none;overflow:hidden}
+ .vr-person{object-fit:cover;object-position:50% 28%;transform-origin:50% 28%}
+ .vr-world{position:absolute;inset:0;overflow:hidden}
+ .vr-world video{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:50% 45%}
+ .vr-shade{background:linear-gradient(180deg,#100b1866 0%,transparent 30%,#100b1840 52%,#100b18ef 75%,#100b18 100%)}
+ .vr-copy,.vr-journey[data-chapter="2"] .vr-copy{
+  left:6%;right:6%;width:auto;max-width:none;bottom:26%;top:auto;min-height:0;
+  transform:none;opacity:1
+ }
+ .vr-copy h2,.vr-journey[data-chapter="2"] .vr-copy h2{
+  max-width:100%;font-size:clamp(31px,8.4vw,37px);line-height:1.04;letter-spacing:-.045em;
+  overflow-wrap:normal;word-break:normal
+ }
+ .vr-copy>p:last-child{max-width:100%;font-size:14px;line-height:1.5}
+ .vr-copy .eyebrow{font-size:9px;margin-bottom:12px}
+ .vr-bottom{left:6%;right:6%;bottom:calc(16px + env(safe-area-inset-bottom));width:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px;padding-top:12px}
+ .vr-steps{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;width:100%}
+ .vr-steps button{flex:1;min-width:0;padding:6px 0;font-size:10px;line-height:1.25}
+ .vr-steps button span{font-size:10px;line-height:1.25;margin-top:6px}
+ .vr-bottom>a{max-width:none;font-size:11px;padding-bottom:3px}
+ .vr-motion{top:16px;right:6%;z-index:6;padding:9px 13px;font-size:10px}
+ .vr-live-label{top:58px;right:6%;left:auto;font-size:8px}
+}
+@media(max-width:380px){
+ .vr-copy,.vr-journey[data-chapter="2"] .vr-copy{bottom:28%}
+ .vr-copy h2,.vr-journey[data-chapter="2"] .vr-copy h2{font-size:30px}
+ .vr-steps{gap:5px}.vr-steps button,.vr-steps button span{font-size:9px}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+ .vr-journey{height:auto!important;overflow:visible}
+ .vr-pin{position:relative!important;top:auto;height:850px!important;min-height:0!important}
+}
