@@ -1,0 +1,22 @@
+(()=>{
+const quality=document.querySelector('.visual-story'),dash=document.querySelector('.dashboard-story');
+const qualityItems=[['Saint Elliot','La luz revela el carácter.','Una atmósfera que permite imaginar cómo se vive el espacio, desde la primera mirada.'],['Océano Atlántico','Los materiales cuentan la historia.','Texturas, reflejos e iluminación para presentar el detalle de cada ambiente.'],['El Olimpo de Tumbes','La escala conecta cada espacio.','Del conjunto a las amenidades: una visión que permite comprender cómo se relaciona el proyecto.']];
+const dashItems=[['Conoce el interés.','Consulta visitas, permanencia por unidad y secciones exploradas.'],['Organiza el siguiente paso.','Coordina citas, disponibilidad y agendas para acompañar cada consulta.'],['Dale continuidad a tu contenido.','Prepara piezas con los recursos del proyecto y las herramientas del estudio creativo IA.']];
+let qCurrent=0,dCurrent=0,qManualY=null,dManualY=null,scheduled=false;
+const mobile=matchMedia('(max-width:760px)'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
+function setQuality(n){qCurrent=n;document.querySelectorAll('[data-quality]').forEach((b,i)=>{b.classList.toggle('active',i===n);b.setAttribute('aria-pressed',String(i===n))});quality.querySelectorAll('.visual-images img').forEach((im,i)=>im.classList.toggle('is-current',i===n));['quality-project','quality-title','quality-copy'].forEach((id,i)=>document.getElementById(id).textContent=qualityItems[n][i]);quality.style.setProperty('--quality-progress',String((n+1)/3))}
+function setDash(n){dCurrent=n;document.querySelectorAll('[data-dash]').forEach((b,i)=>{b.classList.toggle('active',i===n);b.setAttribute('aria-pressed',String(i===n))});dash.dataset.highlight=String(n);document.getElementById('dash-title').textContent=dashItems[n][0];document.getElementById('dash-copy').textContent=dashItems[n][1]}
+document.querySelectorAll('[data-quality]').forEach(b=>b.addEventListener('click',()=>{qManualY=scrollY;setQuality(Number(b.dataset.quality))}));
+document.querySelectorAll('[data-dash]').forEach(b=>b.addEventListener('click',()=>{dManualY=scrollY;setDash(Number(b.dataset.dash));update()}));
+function update(){scheduled=false;const paused=document.body.classList.contains('paused')||reduced.matches;const qr=quality?.getBoundingClientRect(),dr=dash?.getBoundingClientRect();if(qManualY!==null&&Math.abs(scrollY-qManualY)>110)qManualY=null;if(dManualY!==null&&Math.abs(scrollY-dManualY)>160)dManualY=null;
+if(quality&&!paused&&!mobile.matches){const qp=clamp(-qr.top/(quality.offsetHeight-innerHeight));if(qr.top<innerHeight&&qr.bottom>0&&qManualY===null){const next=Math.min(2,Math.floor(qp*3));if(next!==qCurrent)setQuality(next);quality.style.setProperty('--quality-progress',String(qp))}}
+if(!dash)return;const progress=mobile.matches?clamp((innerHeight*.9-dr.top)/(innerHeight*.55)):clamp(-dr.top/Math.max(1,dash.offsetHeight-innerHeight));const opened=paused||dManualY!==null?1:clamp((innerHeight*.65-dr.top)/(innerHeight*.85));const ease=opened*opened*(3-2*opened);
+dash.style.setProperty('--lid-angle',`${-48*(1-ease)}deg`);dash.style.setProperty('--device-yaw',`${0*(1-ease)}deg`);dash.style.setProperty('--device-scale',String(.96+.04*ease));dash.style.setProperty('--device-y',`${0*(1-ease)}px`);dash.style.setProperty('--glow',String(.5+.5*ease));
+if(!paused&&!mobile.matches&&dManualY===null&&dr.top<0&&dr.bottom>0){const n=progress<.54?0:progress<.78?1:2;if(n!==dCurrent)setDash(n)}
+}
+function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});reduced.addEventListener('change',schedule);mobile.addEventListener('change',schedule);update();
+const mini=document.querySelector('#motion-mini');mini?.addEventListener('click',()=>document.querySelector('#motion').click());const sync=()=>{if(!mini)return;const paused=document.body.classList.contains('paused');mini.textContent=paused?'▷':'Ⅱ';mini.setAttribute('aria-label',paused?'Activar movimiento':'Pausar movimiento');mini.setAttribute('aria-pressed',String(paused))};new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();
+})();
+
+
