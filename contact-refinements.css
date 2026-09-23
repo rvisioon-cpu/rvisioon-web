@@ -1,0 +1,22 @@
+/* Contact step one: clear form rows and an editorial image panel. */
+.contact-page .contact-intro{position:relative;align-self:start;height:clamp(560px,calc(100svh - 150px),700px);min-height:0;display:flex;align-items:stretch;overflow:hidden;border-radius:10px;background:#17121f;color:#fff;isolation:isolate}
+.contact-page .contact-visual-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;z-index:-2}
+.contact-page .contact-intro:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#14101912 0%,#14101942 35%,#141019ed 100%)}
+.contact-page .contact-intro-copy{align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;width:100%;padding:clamp(26px,3vw,46px);position:relative;z-index:1}
+.contact-page .contact-intro .eyebrow{color:#ddbaf1;font-size:10px;letter-spacing:.16em}
+.contact-page .contact-intro h1{font-size:clamp(40px,3.8vw,54px);line-height:1.06;margin:10px 0 12px}
+.contact-page .contact-intro h1 em{color:#d7a9f0}
+.contact-page .contact-intro-copy>p:not(.eyebrow){max-width:480px;color:#eee6f3;font-size:14px;line-height:1.7}
+.contact-page .contact-direct{font-size:19px;color:white;margin-top:16px}
+.contact-page .contact-direct small{color:#d7a9f0}
+.contact-page .contact-form-card{align-self:stretch}
+.contact-page .question-group .choice{display:flex;width:100%;align-items:flex-start;gap:12px;margin:0;padding:13px 5px;border:0;border-bottom:1px solid #e4dce8;border-radius:0;background:transparent;cursor:pointer;color:#51445a;font-size:13px;transition:background .18s,color .18s,padding .18s}
+.contact-page .question-group .choice:hover{background:#f8f4fa}
+.contact-page .question-group .choice:has(input:checked){padding-left:12px;border-color:#cfb6dc;background:#f2eaf6;color:#60327c;box-shadow:inset 3px 0 #8651a5}
+.contact-page .question-group .choice input[type=radio]{display:inline-block;flex:0 0 auto;width:16px;height:16px;padding:0;margin:2px 0 0;border:0;background:none;accent-color:#713c97}
+.contact-page .question-group .choice span{flex:1}
+.contact-page .question-group .choice b{font-size:13px}
+.contact-page .question-group .choice small{font-size:11px}
+@media(max-width:1050px){.contact-page .contact-intro{height:clamp(600px,calc(100svh - 145px),700px)}}
+@media(max-width:760px){.contact-page .contact-intro{height:520px}.contact-page .contact-intro-copy{padding:27px 22px}.contact-page .contact-intro h1{font-size:clamp(38px,10vw,54px)}.contact-page .contact-visual-image{object-position:center 22%}.contact-page .contact-form-card{align-self:auto}.contact-page .question-group .choice{padding:12px 4px}}
+@media(min-width:761px){.contact-page .contact-form-card{padding:24px}.contact-page .contact-progress{margin-bottom:18px}.contact-page .contact-form-card .step-lead{margin-bottom:10px}.contact-page .question-group{margin-top:13px}.contact-page .question-group legend{margin-bottom:5px}.contact-page .question-group .choice{padding-top:8px;padding-bottom:8px}.contact-page .contact-form-card .form-next{margin-top:14px;margin-bottom:8px}}
