@@ -23,8 +23,28 @@ document.querySelectorAll('[data-team]').forEach(d=>d.addEventListener('toggle',
 const process=document.querySelector('.process-reveal'),steps=process?[...process.querySelectorAll('li')]:[];if(process&&!reduced.matches)process.classList.add('is-enhanced');
 const vr=document.querySelector('.vr-journey'),clamp=(x)=>Math.min(1,Math.max(0,x));let vrManual=null,vrManualY=0,vrPaused=false;
 const vrCopy=[['De mirar un espacio.','A sentirte dentro.','Los lentes de realidad virtual abren otra manera de presentar la arquitectura de tu proyecto.'],['El proyecto se acerca.','La experiencia te rodea.','Una nueva perspectiva para descubrir la escala, la distribución y el carácter de cada ambiente.'],['Ya estás dentro.','Ahora, explóralo.','Recorre los interiores de Océano Atlántico y descubre cómo se conectan sus espacios.']];let vrChapter=-1;
-function renderVR(p){if(!vr)return;const scale=1+Math.pow(clamp(p/.7),2)*3;const enter=clamp((p-.3)/.5);vr.style.setProperty('--vr-scale',reduced.matches||vrPaused?1:scale);vr.style.setProperty('--vr-person-opacity',1-clamp((p-.55)/.25));vr.style.setProperty('--vr-top',(20*(1-enter))+'%');vr.style.setProperty('--vr-side',(36*(1-enter))+'%');vr.style.setProperty('--vr-bottom',(62*(1-enter))+'%');vr.style.setProperty('--vr-radius',(80*(1-enter))+'px');vr.style.setProperty('--vr-world-opacity',clamp((p-.3)/.16));vr.style.setProperty('--vr-world-scale',1.08-.08*enter);const n=p<.32?0:p<.7?1:2;if(n!==vrChapter){vrChapter=n;vr.dataset.chapter=n;const title=document.querySelector('#vr-title');title.replaceChildren(document.createTextNode(vrCopy[n][0]),document.createElement('br'));const em=document.createElement('em');em.textContent=vrCopy[n][1];title.append(em);document.querySelector('#vr-description').textContent=vrCopy[n][2];document.querySelectorAll('[data-vr]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.vr)===n)))}}
-document.querySelectorAll('[data-vr]').forEach(b=>b.addEventListener('click',()=>{vrManual=[0,.52,1][Number(b.dataset.vr)];vrManualY=scrollY;renderVR(vrManual)}));document.querySelector('.vr-motion')?.addEventListener('click',e=>{vrPaused=!vrPaused;e.currentTarget.setAttribute('aria-pressed',String(vrPaused));e.currentTarget.textContent=vrPaused?'Activar transición ▷':'Pausar transición Ⅱ';if(vrPaused){vrManual=vrChapter===2?1:0;renderVR(vrManual)}else{vrManual=null;update()}});
+function renderVR(p){if(!vr)return;
+const ease=x=>{x=clamp(x);return x*x*(3-2*x)};
+const visual=vr.querySelector('.vr-visual'),w=visual.clientWidth,h=visual.clientHeight;
+// Match the portal to the actual visor in the cover-scaled source photograph.
+const fit=Math.max(w/1672,h/941),cx=w/2,cy=(h-941*fit)*.28+260*fit;
+const zoom=ease((p-.08)/.64),scale=1+zoom*5.5;
+const expand=ease((p-.36)/.43),halfW=181*fit*scale,halfH=78*fit*scale;
+const set=(name,value)=>vr.style.setProperty(name,value);
+set('--vr-origin',cx+'px '+cy+'px');set('--vr-scale',reduced.matches||vrPaused?1:scale);
+set('--vr-person-opacity',1-ease((p-.67)/.15));
+set('--vr-top',Math.max(0,(cy-halfH)*(1-expand))+'px');
+set('--vr-left',Math.max(0,(cx-halfW)*(1-expand))+'px');
+set('--vr-right',Math.max(0,(w-cx-halfW)*(1-expand))+'px');
+set('--vr-bottom',Math.max(0,(h-cy-halfH)*(1-expand))+'px');
+set('--vr-radius',(46*fit*(1-expand))+'px');
+set('--vr-world-opacity',ease((p-.13)/.16));
+set('--vr-world-scale',1);
+set('--vr-video-scale',1.32-.23*ease((p-.35)/.5));
+set('--vr-copy-opacity',1-ease((p-.23)/.12)+ease((p-.79)/.12));
+set('--vr-progress',(p*100)+'%');
+const n=p<.32?0:p<.7?1:2;if(n!==vrChapter){vrChapter=n;vr.dataset.chapter=n;const title=document.querySelector('#vr-title');title.replaceChildren(document.createTextNode(vrCopy[n][0]),document.createElement('br'));const em=document.createElement('em');em.textContent=vrCopy[n][1];title.append(em);document.querySelector('#vr-description').textContent=vrCopy[n][2];document.querySelectorAll('[data-vr]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.vr)===n)))}}
+document.querySelectorAll('[data-vr]').forEach(b=>b.addEventListener('click',()=>{vrManual=[0,.52,1][Number(b.dataset.vr)];if(!reduced.matches&&!vrPaused){const top=scrollY+vr.getBoundingClientRect().top;window.scrollTo({top:top+Math.max(1,vr.offsetHeight-innerHeight)*Math.min(.94,vrManual),behavior:'instant'})}vrManualY=scrollY;renderVR(vrManual)}));document.querySelector('.vr-motion')?.addEventListener('click',e=>{vrPaused=!vrPaused;e.currentTarget.setAttribute('aria-pressed',String(vrPaused));e.currentTarget.textContent=vrPaused?'Activar transición ▷':'Pausar transición Ⅱ';if(vrPaused){vrManual=vrChapter===2?1:0;renderVR(vrManual)}else{vrManual=null;update()}});
 function update(){if(process){let active=0;steps.forEach((li,i)=>{if(li.getBoundingClientRect().top<innerHeight*.6)active=i});steps.forEach((li,i)=>{li.classList.toggle('is-current',i===active);li.classList.toggle('was-read',i<active)});document.querySelector('#process-current').textContent='0'+(active+1)}if(vr){const vrBounds=vr.getBoundingClientRect();vr.classList.toggle('is-in-view',vrBounds.top<innerHeight*.65&&vrBounds.bottom>innerHeight*.35);if(vrManual!==null&&Math.abs(scrollY-vrManualY)>120&&!vrPaused&&!reduced.matches)vrManual=null;const stopped=reduced.matches||vrPaused||document.body.classList.contains('paused');const p=vrManual!==null?vrManual:stopped?0:clamp(-vr.getBoundingClientRect().top/Math.max(1,vr.offsetHeight-innerHeight));renderVR(p)}}let pending=false;function schedule(){if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;update()})}}addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);reduced.addEventListener('change',schedule);new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});update();
 })();
 

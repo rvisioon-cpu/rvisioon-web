@@ -1,0 +1,32 @@
+/* The visor is the doorway: one continuous, scroll-controlled camera move. */
+.vr-journey{height:300svh;overflow:clip}
+.vr-pin{height:100svh;min-height:620px}
+.vr-person{transform-origin:var(--vr-origin,50% 28%);filter:brightness(.95);transition:none}
+.vr-world{clip-path:inset(var(--vr-top,25%) var(--vr-right,38%) var(--vr-bottom,62%) var(--vr-left,38%) round var(--vr-radius,46px));transform:none;background:#17111c}
+.vr-world video{transform:scale(var(--vr-video-scale,1.32));transform-origin:50% 45%;will-change:transform}
+.vr-shade{background:linear-gradient(0deg,#100b18df,transparent 39%),linear-gradient(90deg,#100b1870,transparent 55%)}
+.vr-copy,.vr-journey[data-chapter="2"] .vr-copy{opacity:var(--vr-copy-opacity,1);bottom:155px;max-width:520px;pointer-events:none}
+.vr-copy h2,.vr-journey[data-chapter="2"] .vr-copy h2{font-size:clamp(36px,4.1vw,64px);margin-bottom:18px}
+.vr-copy>p:last-child{font-size:14px;max-width:380px;line-height:1.6}
+.vr-copy .eyebrow{margin-bottom:16px}
+.vr-bottom{bottom:32px;padding-top:16px;gap:24px}
+.vr-bottom:before{content:'';position:absolute;top:-1px;left:0;height:2px;width:var(--vr-progress,0%);background:#dab8ed;box-shadow:0 0 12px #ad74d8}
+.vr-live-label{opacity:0;transition:opacity .35s;top:30px;right:6%}
+.vr-journey[data-chapter="2"] .vr-live-label{opacity:1}
+.vr-motion{display:none}
+@media(max-width:760px){
+ .vr-journey{height:280svh!important}
+ .vr-pin{min-height:620px!important}
+ .vr-person{transform-origin:var(--vr-origin,50% 28%)}
+ .vr-copy,.vr-journey[data-chapter="2"] .vr-copy{bottom:170px;left:6%;right:6%;max-width:none}
+ .vr-copy h2,.vr-journey[data-chapter="2"] .vr-copy h2{font-size:clamp(30px,8vw,40px);line-height:1.08}
+ .vr-copy>p:last-child{font-size:12px;max-width:30ch}
+ .vr-shade{background:linear-gradient(0deg,#100b18f5,transparent 55%)}
+ .vr-bottom{bottom:24px;gap:12px}.vr-live-label{top:24px}
+ .vr-world video{transform:scale(var(--vr-video-scale,1.32))}
+}
+@media(prefers-reduced-motion:reduce){
+ .vr-journey{height:auto!important}.vr-pin{position:relative!important;height:850px!important}
+ .vr-person,.vr-world video{transform:none!important}.vr-copy{opacity:1!important}
+}
+body:has(.vr-journey.is-in-view) .sticky-contact.whatsapp-dock{visibility:hidden!important;pointer-events:none!important}
