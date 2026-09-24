@@ -1,0 +1,21 @@
+/* A landscape phone stays slimmer than the 16:10 tablet. */
+.showcase .show-image[data-device="unit"] .scene-device{width:min(100%,480px);max-width:100%;aspect-ratio:19.5/9;padding:8px 23px;border-radius:30px;overflow:hidden}
+.showcase .show-image[data-device="unit"] .scene-device img{object-fit:cover;object-position:center;border-radius:18px}
+.showcase .show-image[data-device="unit"] .scene-device:before{width:9px;height:48px;left:8px;top:calc(50% - 24px);border-radius:10px}
+.showcase .show-image[data-device="unit"] .scene-device:after{width:3px;height:29%;left:auto;right:8px;top:35.5%;bottom:auto;border-radius:4px}
+.showcase .show-image[data-device="unit"]>span{margin-top:32px}
+.film-integrated .film-pair{position:absolute;left:6vw;top:var(--film-top,52%);width:var(--film-width,43%);display:grid;grid-template-columns:1fr 1fr;gap:22px;z-index:2}
+.film-integrated .film-pair .film-screen{position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:16/10;min-height:0;transform:none;overflow:hidden}
+.film-integrated .film-pair .film-screen:nth-child(2){transform:translateY(calc((1 - var(--pair-progress,0))*38px))}
+.film-integrated .film-pair .film-caption{padding:16px;font-size:9px;display:flex;flex-wrap:wrap;gap:8px}
+.film-integrated .film-pair .film-play{width:48px;height:48px}
+.contact.contact-pierre{display:grid;grid-template-columns:1fr 1.15fr;gap:6%;align-items:center;background:#251a30}
+.contact-pierre .contact-content{min-width:0}
+.contact-pierre h2{font-size:clamp(44px,5.3vw,78px)}
+.contact-pierre .contact-row{display:block;margin-top:24px}
+.contact-pierre .contact-row p{font-size:15px;line-height:1.8}
+.contact-pierre .actions{margin-top:24px}
+.contact-pierre .contact-portrait{margin:0;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px #0c071a55}
+.contact-pierre .contact-portrait img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+@media(max-width:760px){.showcase .show-image[data-device="unit"] .scene-device{width:min(100%,420px);max-width:100%;border-radius:24px;padding:6px 20px}.showcase .show-image[data-device="unit"] .scene-device:before{left:6px;width:8px;height:38px;top:calc(50% - 19px)}.showcase .show-image[data-device="unit"] .scene-device:after{right:6px}.film-integrated .film-pair{position:relative;left:auto;top:auto;width:100%;grid-template-columns:1fr;gap:20px}.film-integrated .film-pair .film-screen:nth-child(2){transform:none}.contact.contact-pierre{grid-template-columns:1fr;gap:32px}.contact-pierre h2{font-size:48px}.contact-pierre .contact-portrait{border-radius:12px}}
+@media(prefers-reduced-motion:reduce){.film-integrated .film-pair{position:relative;left:auto;top:auto;width:100%;margin-top:30px}.film-integrated .film-pair .film-screen:nth-child(2){transform:none}}

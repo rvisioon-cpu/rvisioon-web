@@ -43,6 +43,7 @@ if(demoStage){
  const poster=demoStage.querySelector('.showroom-demo-poster');
  frame?.addEventListener('load',()=>{frame.dataset.ready='true';clearTimeout(demoLoadTimer);if(poster)poster.hidden=true});
  trigger?.addEventListener('click',()=>{if(trigger.disabled)return;loadShowroom(frame.dataset.src)});
+ if(frame){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){if(!frame.dataset.loaded)loadShowroom(frame.dataset.src);observer.disconnect();}},{rootMargin:'900px'});observer.observe(demoStage);}
 }
 document.querySelectorAll('.showroom-studio').forEach(studio=>{
  const tabs=[...studio.querySelectorAll('[role="tab"]')];

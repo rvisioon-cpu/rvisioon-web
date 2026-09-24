@@ -1,0 +1,41 @@
+:root{--site-header-height:82px}
+body:has(>header){padding-top:var(--site-header-height)}
+body>header{position:fixed!important;inset:0 0 auto;width:100%;z-index:1000!important;background:#141019f2!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:16px 4%;border-bottom:1px solid #ffffff25;box-shadow:0 4px 24px #100b1920}
+html{scroll-padding-top:calc(var(--site-header-height) + 16px)}
+main [id],section[id]{scroll-margin-top:calc(var(--site-header-height) + 16px)}
+body>header nav.open{max-height:calc(100dvh - var(--site-header-height));overflow-y:auto}
+.cinematic-top{top:calc(var(--site-header-height) + 22px)}
+.portal-topline{top:calc(var(--site-header-height) + 20px)}
+.dashboard-stage{padding-top:calc(var(--site-header-height) + 18px)}
+.article-index{top:calc(var(--site-header-height) + 24px)}
+.skip:focus{position:fixed;z-index:1100}
+.case-grid .teaser-case>div:last-child h2{font-size:clamp(27px,2.8vw,42px);line-height:1.2}
+.crm-strip .crm-logo-row{background:none;border:0;border-bottom:1px solid #d7c8df;border-radius:0;padding:12px 0 24px;gap:28px}
+.crm-strip .crm-logo-row>div,.crm-strip .crm-logo-row>div:last-child{background:none;border-radius:0;padding:0}
+.crm-strip .crm-logo-row img{filter:brightness(0);opacity:.9;height:46px;max-width:180px}
+.crm-strip .crm-choice{font-size:14px;color:#62516e;line-height:1.7}
+@media(max-width:1000px){body>header{padding:12px 6%}body>header nav{top:100%}}
+@media(max-width:760px){.case-grid .teaser-case>div:last-child h2{font-size:28px}.crm-strip .crm-logo-row{gap:18px}.crm-strip .crm-logo-row img{height:38px}.portal-topline{top:calc(var(--site-header-height) + 14px)}.cinematic-top{top:calc(var(--site-header-height) + 14px)}.dashboard-stage{padding-top:calc(var(--site-header-height) + 18px)}}
+
+.crm-strip .crm-sperant-mark{position:relative}
+.crm-strip .crm-logo-row .crm-symbol-detail{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);clip-path:inset(0 74% 0 0);filter:grayscale(1) contrast(4);pointer-events:none}
+/* Device silhouettes: phone portrait, tablet landscape. */
+.showcase .show-image[data-device="unit"] .scene-device{width:224px;max-width:72%;aspect-ratio:9/19.5;padding:25px 7px 18px;border-radius:32px;overflow:hidden;box-shadow:0 22px 44px #21142e30,inset 0 0 0 2px #070609}
+.showcase .show-image[data-device="unit"] .scene-device img{object-fit:cover;object-position:52% center;border-radius:19px;background:#17151c}
+.showcase .show-image[data-device="unit"] .scene-device:before{width:58px;height:10px;left:calc(50% - 29px);top:9px;border-radius:12px;background:#050406;z-index:2}
+.showcase .show-image[data-device="unit"] .scene-device:after{width:31%;height:3px;left:34.5%;right:auto;top:auto;bottom:7px;background:#bcb4c5}
+.showcase .show-image[data-device="unit"]>span{margin-top:24px}
+.logos img.buleje-logo,.ribbon-track img.buleje-logo{filter:brightness(0);opacity:1;object-fit:contain;max-width:180px}
+.projects .project{position:relative;isolation:isolate;overflow:hidden;transition:box-shadow .45s ease}
+.projects .project:after{content:'';position:absolute;inset:-40% -90%;z-index:2;pointer-events:none;background:linear-gradient(112deg,transparent 43%,#fff2 48%,#fff6 50%,#fff1 53%,transparent 58%);transform:translateX(-55%);opacity:0}
+.projects .project>img{transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .5s;transform-origin:50% 60%}
+.projects .project>div{z-index:3}
+.projects .project:focus-visible{outline:3px solid #b883dc;outline-offset:-3px}
+@media(hover:hover){.projects .project:hover{box-shadow:0 16px 35px #39234c30}.projects .project:hover>img{transform:scale(1.055);filter:brightness(1.08)}.projects .project:hover:after{animation:project-light-pass .95s ease both}.projects .project:hover>div span{color:#f4deff}}
+.projects .project:focus-visible:after{animation:project-light-pass .95s ease both}
+@keyframes project-light-pass{0%{transform:translateX(-55%);opacity:0}20%{opacity:1}100%{transform:translateX(55%);opacity:0}}
+.oceano-card-image{object-position:51% center!important}
+@media(min-width:761px){.film-integrated .film-pin{top:var(--site-header-height);height:calc(100svh - var(--site-header-height));min-height:540px}}
+@media(max-width:760px){.showcase .show-image[data-device="unit"] .scene-device{width:196px;max-width:72%}}
+@media(prefers-reduced-motion:reduce){.projects .project,.projects .project>img{transition:none}.projects .project:after{display:none}.projects .project:hover>img{transform:none}}
+.paused .projects .project:after{animation:none}

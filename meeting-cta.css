@@ -1,0 +1,32 @@
+/* A quiet editorial layout preserves the complete meeting photograph. */
+.meeting-cta,.contact.contact-pierre.meeting-cta{position:relative;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:5%;padding:76px 6%;background:#211a28;color:#fff;text-align:left;isolation:isolate}
+.meeting-cta:after,.meeting-cta:before{display:none!important}
+.meeting-cta .contact-content{position:relative;min-width:0;padding:0;align-self:center}
+.meeting-cta .eyebrow{color:#cfb6df;font-size:10px;letter-spacing:.13em;margin:0 0 22px}
+.meeting-cta h2,.contact-pierre.meeting-cta h2{color:#fff;font-size:clamp(34px,3.45vw,52px);line-height:1.12;letter-spacing:-.045em;margin:0 0 24px;max-width:540px;text-wrap:balance}
+.meeting-cta h3{color:#fff}.meeting-cta h2 em{color:#cba6e1;font-style:normal}
+.meeting-cta .contact-content>p:not(.eyebrow),.meeting-cta .contact-row>p{color:#d5cbdc;font-size:15px;line-height:1.8;max-width:440px;margin:0 0 26px}
+.meeting-cta .contact-row{display:block;margin:0}
+.meeting-cta .category-actions,.meeting-cta .actions{display:flex;flex-direction:column;align-items:flex-start;gap:15px;margin-top:25px}
+.meeting-cta .cta{display:inline-block;background:#eee5f4;color:#382642;font-size:13px;padding:17px 20px;max-width:100%;white-space:normal;line-height:1.5}
+.meeting-cta .text-link{color:#eee0f6;font-size:12px}
+.meeting-cta .contact-portrait,.contact-pierre.meeting-cta .contact-portrait{position:relative;align-self:center;margin:0;border-radius:5px;box-shadow:none;min-height:0;overflow:hidden;background:transparent}
+.meeting-cta .contact-portrait img,.contact-pierre.meeting-cta .contact-portrait img{display:block;width:100%;height:auto;position:static;object-fit:contain;object-position:center;aspect-ratio:3/2;filter:none;opacity:1}
+.meeting-cta .contact-portrait:after,.meeting-cta .contact-portrait:before{display:none}
+.article-next.meeting-cta{margin-top:50px;border:0;border-radius:8px;padding:32px;gap:28px;grid-template-columns:1fr 1.1fr}
+.article-next.meeting-cta h2,.article-next.meeting-cta h3{font-size:27px;line-height:1.15}.article-next.meeting-cta .contact-content{padding:0}
+@media(max-width:1000px){.meeting-cta,.contact.contact-pierre.meeting-cta{grid-template-columns:1fr;gap:32px;padding:54px 6%}.meeting-cta .contact-content{max-width:650px}.meeting-cta h2,.contact-pierre.meeting-cta h2{font-size:42px}.meeting-cta .contact-portrait{width:100%;max-width:800px}.article-next.meeting-cta{grid-template-columns:1fr;padding:28px}}
+@media(max-width:480px){.meeting-cta,.contact.contact-pierre.meeting-cta{padding:42px 6%;gap:28px}.meeting-cta h2,.contact-pierre.meeting-cta h2{font-size:36px}.meeting-cta .contact-content>p:not(.eyebrow),.meeting-cta .contact-row>p{font-size:14px}.meeting-cta .cta{font-size:12px}.article-next.meeting-cta{padding:24px}}
+/* Continuous banner: the photograph sits behind a broad, soft reading shadow. */
+.meeting-cta,.contact.contact-pierre.meeting-cta{display:block;position:relative;min-height:540px;padding:68px 6%;background:#17131d;isolation:isolate;overflow:hidden}
+.meeting-cta .contact-content{position:relative;z-index:2;width:43%;max-width:540px;padding:0}
+.meeting-cta .contact-portrait,.contact-pierre.meeting-cta .contact-portrait{position:absolute;z-index:-2;inset:0 0 0 29%;width:auto;max-width:none;min-height:0;height:100%;margin:0;border-radius:0;overflow:hidden}
+.meeting-cta .contact-portrait img,.contact-pierre.meeting-cta .contact-portrait img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 48%}
+.meeting-cta:before{display:block!important;content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#17131d 0%,#17131dfc 25%,#17131de8 34%,#17131da6 43%,#17131d50 51%,#17131d12 61%,transparent 72%),linear-gradient(0deg,#0b091252,transparent 35%,transparent 80%,#0b09122b)}
+.meeting-cta h2,.contact-pierre.meeting-cta h2{font-size:clamp(34px,3.45vw,52px)}
+.meeting-cta .contact-content>p:not(.eyebrow),.meeting-cta .contact-row>p{max-width:410px}
+.article-next.meeting-cta{min-height:380px;padding:36px;border-radius:0}.article-next.meeting-cta .contact-content{width:47%;padding:0}.article-next.meeting-cta h2,.article-next.meeting-cta h3{font-size:28px}
+@media(max-width:1000px) and (min-width:761px){.meeting-cta,.contact.contact-pierre.meeting-cta{padding:54px 6%;min-height:520px}.meeting-cta .contact-content{width:46%}.meeting-cta .contact-portrait{left:24%}.meeting-cta h2,.contact-pierre.meeting-cta h2{font-size:38px}}
+@media(max-width:760px){.meeting-cta,.contact.contact-pierre.meeting-cta{padding:40px 6% 280px;min-height:0}.meeting-cta .contact-content,.article-next.meeting-cta .contact-content{width:100%;max-width:560px}.meeting-cta .contact-portrait,.contact-pierre.meeting-cta .contact-portrait{inset:auto 0 0;height:350px;width:100%;aspect-ratio:auto}.meeting-cta .contact-portrait img{object-position:center}.meeting-cta:before{background:linear-gradient(0deg,#17131d12 0,transparent 190px,#17131d80 270px,#17131df0 330px,#17131d 375px)}.meeting-cta h2,.contact-pierre.meeting-cta h2{font-size:36px}.article-next.meeting-cta{padding:30px 24px 260px}.article-next.meeting-cta .contact-portrait{height:310px}}
+
+@media(max-width:760px){.meeting-cta,.contact.contact-pierre.meeting-cta{padding-bottom:340px}.article-next.meeting-cta{padding-bottom:310px}}

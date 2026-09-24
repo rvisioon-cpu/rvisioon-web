@@ -1,0 +1,1 @@
+(()=>{'use strict';const header=document.querySelector('body>header');if(!header)return;const size=()=>document.documentElement.style.setProperty('--site-header-height',Math.ceil(header.getBoundingClientRect().height)+'px');new ResizeObserver(size).observe(header);size();})();
