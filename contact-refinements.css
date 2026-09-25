@@ -20,3 +20,30 @@
 @media(max-width:1050px){.contact-page .contact-intro{height:clamp(600px,calc(100svh - 145px),700px)}}
 @media(max-width:760px){.contact-page .contact-intro{height:520px}.contact-page .contact-intro-copy{padding:27px 22px}.contact-page .contact-intro h1{font-size:clamp(38px,10vw,54px)}.contact-page .contact-visual-image{object-position:center 22%}.contact-page .contact-form-card{align-self:auto}.contact-page .question-group .choice{padding:12px 4px}}
 @media(min-width:761px){.contact-page .contact-form-card{padding:24px}.contact-page .contact-progress{margin-bottom:18px}.contact-page .contact-form-card .step-lead{margin-bottom:10px}.contact-page .question-group{margin-top:13px}.contact-page .question-group legend{margin-bottom:5px}.contact-page .question-group .choice{padding-top:8px;padding-bottom:8px}.contact-page .contact-form-card .form-next{margin-top:14px;margin-bottom:8px}}
+/* Give the live agenda room to show its calendar and booking details. */
+.contact-landing:has([data-step="3"]:not([hidden])){grid-template-columns:minmax(0,1fr)}
+.contact-landing:has([data-step="3"]:not([hidden])) .contact-intro{display:none}
+.contact-landing:has([data-step="3"]:not([hidden])) .contact-form-card{width:100%;max-width:1120px;margin-inline:auto;min-width:0;scroll-margin-top:110px}
+.contact-page .zcal-frame{background:#fff}
+.contact-page .zcal-frame iframe{height:1050px;background:#fff}
+@media(max-width:760px){
+ .contact-landing:has([data-step="3"]:not([hidden])){padding:40px 3%}
+ .contact-landing:has([data-step="3"]:not([hidden])) .contact-form-card{padding:12px 0}
+ .contact-landing:has([data-step="3"]:not([hidden])) .contact-progress,
+ .contact-step[data-step="3"]> :not(.zcal-frame){margin-left:16px;margin-right:16px}
+ .contact-page .zcal-frame{border-radius:0;border-inline:0}
+ .contact-page .zcal-frame iframe{height:1200px}
+}
+
+/* Keep a usable booking action visible even when a browser blocks embedded pages. */
+.contact-page .zcal-frame{position:relative;min-height:0;background:#fffafc;border:1px solid #ded4e3}
+.contact-page .calendar-notice{padding:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#f3edf6}
+.contact-page .calendar-notice p{flex:1 1 280px;margin:0;font-size:14px;color:#51445a}
+.contact-page .calendar-notice .cta{flex:0 0 auto}
+.contact-page .calendar-notice .calendar-retry{width:auto;background:none;color:#713c97;text-decoration:underline;font-size:13px;padding:8px}
+.contact-page .calendar-retry[hidden]{display:none}
+.contact-page .zcal-frame:not(.calendar-ready) iframe{position:absolute;top:0;left:0;height:1px!important;opacity:0;pointer-events:none}
+.contact-page .zcal-frame.calendar-ready iframe{position:static;opacity:1;min-height:544px}
+@media(max-width:760px){.contact-page .calendar-notice{padding:20px 16px}.contact-page .calendar-notice .cta{width:100%;text-align:center}}
+
+.contact-page .zcal-frame + .form-actions .zcal-fallback{display:none}

@@ -10,27 +10,94 @@ if(contactForm){
     document.querySelector('.contact-form-card')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
     if(index===2)loadZcal();
   };
-  const loadZcal=()=>{
+  let calendarCleanup=()=>{};
+  let resizeLibrary;
+  const getResizeLibrary=()=>{
+    if(window.iFrameResize)return Promise.resolve();
+    if(!resizeLibrary)resizeLibrary=new Promise((resolve,reject)=>{
+      const script=document.createElement('script');
+      script.src='https://static.zcal.co/embed/v1/embed.js';
+      script.onload=resolve;
+      script.onerror=()=>{resizeLibrary=null;script.remove();reject(new Error('Calendar embed unavailable'))};
+      document.head.append(script);
+    });
+    return resizeLibrary;
+  };
+  const loadZcal=(retry=false)=>{
     const frame=document.querySelector('[data-zcal-frame]');
     const fallback=document.querySelector('.zcal-fallback');
     const invite=contactForm.dataset.zcalUrl.trim();
-    if(!frame||!invite||frame.dataset.loaded==='true')return;
+    if(!frame||!invite)return;
     const data=new FormData(contactForm);
     const url=new URL(invite);
     url.searchParams.set('name',data.get('nombre')||'');
     url.searchParams.set('email',data.get('email')||'');
-    url.searchParams.set('smsPhone',data.get('telefono')||'');
-    url.searchParams.set('a0',data.get('relacion')||'');
-    url.searchParams.set('a1',data.get('unidades')||'');
-    url.searchParams.set('a2',data.get('desarrollo')||'');
+    // Question order in Pierre's existing invitation: phone, project brief, files.
+    url.searchParams.set('a0',data.get('telefono')||'');
+    url.searchParams.set('a1',[
+      'Inmobiliaria o proyecto: '+data.get('proyecto'),
+      'Relación con el sector: '+data.get('relacion'),
+      'Unidades: '+data.get('unidades'),
+      'Tipo de desarrollo: '+data.get('desarrollo')
+    ].join('\n'));
+    const bookingUrl=url.toString();
+    if(fallback){fallback.href=bookingUrl;fallback.hidden=false}
+    // Keep the selected slot unless the visitor changes their brief or retries.
+    if(!retry&&frame.dataset.bookingUrl===bookingUrl)return;
+    calendarCleanup();
+    url.searchParams.set('embed','1');
+    url.searchParams.set('embedType','inline');
+    url.searchParams.set('embedVersion','1.0.2');
+    url.searchParams.set('embedDomain',location.hostname);
     const iframe=document.createElement('iframe');
+    iframe.id='rvisioon-zcal-calendar';
+    iframe.tabIndex=-1;iframe.setAttribute('aria-hidden','true');
     iframe.title='Calendario para reservar una presentación con Rvisioon';
     iframe.src=url.toString();
-    iframe.loading='lazy';
-    iframe.allow='payment';
-    frame.replaceChildren(iframe);
-    frame.dataset.loaded='true';
-    if(fallback){fallback.href=url.toString();fallback.hidden=false}
+    iframe.loading='eager';
+    iframe.referrerPolicy='strict-origin-when-cross-origin';
+    const notice=document.createElement('div');
+    notice.className='calendar-notice';
+    const message=document.createElement('p');
+    message.setAttribute('role','status');
+    message.textContent='Cargando los horarios disponibles…';
+    const direct=document.createElement('a');
+    direct.className='cta';direct.href=bookingUrl;direct.target='_blank';direct.rel='noopener';
+    direct.textContent='Abrir agenda de Pierre ↗';
+    const retryButton=document.createElement('button');
+    retryButton.type='button';retryButton.className='calendar-retry';retryButton.hidden=true;
+    retryButton.textContent='Reintentar aquí';
+    retryButton.addEventListener('click',()=>loadZcal(true));
+    notice.append(message,direct,retryButton);
+    frame.classList.remove('calendar-ready');
+    frame.replaceChildren(notice,iframe);
+    frame.dataset.bookingUrl=bookingUrl;
+    let active=true;
+    const unavailable=()=>{
+      if(!active||frame.classList.contains('calendar-ready'))return;
+      message.textContent='La agenda no pudo mostrarse dentro de esta página. Puedes abrirla directamente con tus datos ya completados.';
+      retryButton.hidden=false;
+    };
+    const timeout=setTimeout(unavailable,12000);
+    const ready=()=>{
+      if(!active)return;
+      clearTimeout(timeout);
+      frame.classList.add('calendar-ready');
+      iframe.removeAttribute('tabindex');iframe.removeAttribute('aria-hidden');
+      message.textContent='Elige tu horario. Si lo prefieres, también puedes abrir la agenda por separado.';
+      retryButton.hidden=true;
+    };
+    // A load event also fires for blocked frames. Wait for the official embed handshake.
+    getResizeLibrary().then(()=>{
+      if(!active)return;
+      window.iFrameResize({checkOrigin:['https://zcal.co'],minHeight:544,
+        heightCalculationMethod:'taggedElement',scrolling:false,
+        onInit:ready,onResized:ready},iframe);
+    }).catch(unavailable);
+    calendarCleanup=()=>{
+      active=false;clearTimeout(timeout);
+      iframe.iFrameResizer?.removeListeners();
+    };
   };
   contactForm.querySelectorAll('[data-next]').forEach(button=>button.addEventListener('click',()=>{
     const index=steps.indexOf(button.closest('[data-step]'));

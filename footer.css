@@ -6,3 +6,45 @@
 .legal-content{max-width:1000px;margin:0 auto;padding:70px 6% 100px}.legal-content .eyebrow{color:#81539a;margin-bottom:20px}.legal-content h1{font-size:clamp(42px,6vw,78px);max-width:850px}.legal-intro{font-size:18px;color:#756b7c;max-width:760px;margin:24px 0 16px}.legal-date{font-size:12px;color:#887d90;border-bottom:1px solid #d8d0dc;padding:0 0 25px;margin-bottom:35px}.legal-content section{padding:22px 0 18px;border-bottom:1px solid #ded7e1}.legal-content h2{font-size:clamp(23px,3vw,32px);margin-bottom:13px}.legal-content p,.legal-content li{font-size:15px;line-height:1.8;color:#5e5664}.legal-content ul{padding-left:22px}.legal-content a:not(.cta){color:#713c97;text-decoration:underline;text-underline-offset:3px}.legal-content .legal-callout{padding:20px 24px;margin-top:30px;background:#ebe4ef;border-left:3px solid #713c97;color:#514759;font-size:13px;line-height:1.7}
 @media(max-width:760px){.site-footer{grid-template-columns:1fr;gap:24px;padding:34px 6% 20px}.footer-social{grid-row:3}.footer-copy{grid-column:1}.legal-content{padding:52px 6% 70px}.legal-intro{font-size:16px}.legal-content p,.legal-content li{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.footer-social a{transition:none}}
+/* Shared contact information and legal links, each on its own line. */
+.site-footer .footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:4px;line-height:1.7}
+.site-footer .footer-contact span{color:#c8bdce;user-select:text}
+.site-footer .footer-address{margin:0;font-style:normal}
+.site-footer .footer-legal{flex-direction:column;align-items:flex-start;flex-wrap:nowrap;gap:10px}
+.contact-page span.contact-direct{display:block;user-select:text}
+/* Compact footer: brand, contact, legal links and social profiles. */
+.site-footer{grid-template-columns:auto minmax(220px,1fr) minmax(150px,.8fr) auto;gap:22px 4%;padding:30px 5% 18px;align-items:center}
+.site-footer .footer-contact{margin:0;gap:4px}
+.site-footer .footer-brand{gap:0}
+.site-footer .footer-legal{gap:6px}
+.site-footer .footer-copy{padding-top:12px}
+@media(max-width:1000px) and (min-width:761px){.site-footer{grid-template-columns:1fr 1fr;gap:18px 5%}.site-footer .footer-social{justify-content:flex-start}}
+@media(max-width:760px){
+ .site-footer{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px 14px;padding:24px 6% 16px;align-items:start}
+ .site-footer .footer-brand{grid-column:1;grid-row:1;align-self:center}
+ .site-footer .footer-brand img{width:135px}
+ .site-footer .footer-social{grid-column:2;grid-row:1;gap:7px;justify-content:flex-end;align-self:center}
+ .site-footer .footer-social a{width:29px;height:29px}
+ .site-footer .footer-social svg{width:14px;height:14px}
+ .site-footer .footer-contact{grid-column:1;grid-row:2;font-size:11px;gap:5px;overflow-wrap:anywhere}
+ .site-footer .footer-legal{grid-column:2;grid-row:2;font-size:11px;gap:7px}
+ .site-footer .footer-copy{grid-column:1/-1;grid-row:3;margin:0;padding-top:10px;font-size:9px}
+}
+/* A quiet, compact footer with clear alignment and restrained separators. */
+.site-footer{position:relative;background:#141019;border-top:1px solid #c8a3df24;grid-template-columns:minmax(150px,.85fr) minmax(230px,1.25fr) minmax(160px,.9fr) auto;gap:22px 4%;padding:32px 5% 18px}
+.site-footer .footer-contact,.site-footer .footer-legal{padding-left:24px;border-left:1px solid #c8a3df24;line-height:1.8}
+.site-footer .footer-contact{gap:3px}
+.site-footer .footer-contact span:first-child{color:#f0e8f5}
+.site-footer .footer-address{color:#a99caf;font-size:11px}
+.site-footer .footer-social{gap:9px}
+.site-footer .footer-social a{width:34px;height:34px;background:#ffffff04;border-color:#c8a3df30}
+.site-footer .footer-copy{color:#a99caf;letter-spacing:.02em;border-color:#c8a3df1c}
+@media(max-width:1000px) and (min-width:761px){.site-footer{grid-template-columns:1fr 1fr}.site-footer .footer-legal{padding-left:0;border-left:0}}
+@media(max-width:760px){
+ .site-footer{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px 16px;padding:26px 6% 16px}
+ .site-footer .footer-contact{padding-left:0;border-left:0}
+ .site-footer .footer-legal{padding-left:14px}
+ .site-footer .footer-social{gap:6px}
+ .site-footer .footer-social a{width:29px;height:29px}
+ .site-footer .footer-address{font-size:10px}
+}

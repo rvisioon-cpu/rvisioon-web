@@ -33,6 +33,6 @@ sceneButtons.forEach(button=>button.addEventListener('click',async()=>{
  ];
  sceneAnimations[0].finished.then(()=>oldImage.remove()).catch(()=>oldImage.remove());
 }));
-const video=document.querySelector('video'),motion=document.querySelector('#motion'),reduced=matchMedia('(prefers-reduced-motion: reduce)');function setPaused(paused){document.body.classList.toggle('paused',paused);motion.setAttribute('aria-pressed',String(paused));motion.textContent=paused?'Activar movimiento ▷':'Pausar movimiento Ⅱ';if(paused)video.pause();else video.play().catch(()=>{video.style.display="none"})}setPaused(reduced.matches);reduced.addEventListener('change',e=>setPaused(e.matches));motion.addEventListener('click',()=>setPaused(!document.body.classList.contains('paused')));
+const video=document.querySelector('video'),motion=document.querySelector('#motion'),reduced=matchMedia('(prefers-reduced-motion: reduce)');function setPaused(paused){document.body.classList.toggle('paused',paused);if(motion){motion.setAttribute('aria-pressed',String(paused));motion.textContent=paused?'Activar movimiento ▷':'Pausar movimiento Ⅱ';}if(paused)video.pause();else video.play().catch(()=>{video.style.display="none"})}setPaused(reduced.matches);reduced.addEventListener('change',e=>setPaused(e.matches));motion?.addEventListener('click',()=>setPaused(!document.body.classList.contains('paused')));
 
 

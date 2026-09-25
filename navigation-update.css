@@ -39,3 +39,24 @@ body>header nav.open{max-height:calc(100dvh - var(--site-header-height));overflo
 @media(max-width:760px){.showcase .show-image[data-device="unit"] .scene-device{width:196px;max-width:72%}}
 @media(prefers-reduced-motion:reduce){.projects .project,.projects .project>img{transition:none}.projects .project:after{display:none}.projects .project:hover>img{transform:none}}
 .paused .projects .project:after{animation:none}
+/* Keep the opening brand sequence clear, then introduce navigation softly. */
+body>header{transition:opacity .45s ease,transform .45s ease,visibility .45s}
+body:has(.brand-intro)>header,body.nav-intro-wait>header{opacity:0;visibility:hidden;transform:translateY(-12px);pointer-events:none}
+body:has(.brand-intro) .whatsapp-dock,body.nav-intro-wait .whatsapp-dock,body.footer-in-view .whatsapp-dock.sticky-contact{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){body>header{transition:none}body:has(.brand-intro)>header{opacity:1;visibility:visible;transform:none;pointer-events:auto}}
+/* Clear home navigation and a more inviting booking action. */
+body>header nav>a:not(.small-cta){transition:color .2s;text-underline-offset:7px}
+body>header nav>a:not(.small-cta):hover,body>header nav>a[aria-current="page"]{color:#dcb5f2;text-decoration:underline;text-decoration-thickness:1px}
+body>header .small-cta{background:#713c97;border-color:#a577c3;color:#fff;box-shadow:0 3px 14px #713c9726;transition:background .22s,color .22s,box-shadow .22s,transform .22s,border-color .22s;white-space:nowrap}
+body>header .small-cta:hover,body>header .small-cta:focus-visible{background:#dfc3f0;border-color:#dfc3f0;color:#251332;box-shadow:0 6px 22px #b77fd640;transform:translateY(-2px)}
+body>header .small-cta:active{transform:translateY(0);box-shadow:none}
+/* The permanent readability shadow is independent of the animated light sweep. */
+.projects .project:before,.portfolio-grid .project:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 30%,#100b182b 48%,#100b18c4 73%,#100b18f5 100%)}
+.projects .project>div,.portfolio-grid .project>div{z-index:3;text-shadow:0 2px 12px #0009}
+.case-grid .case>a{position:relative;isolation:isolate}
+.case-grid .case>a:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 48%,#100b1833 65%,#100b18d9 100%)}
+.case-grid .case-open{z-index:2}
+@media(min-width:761px) and (max-width:1100px){body>header{gap:16px;padding-inline:3%}body>header nav{gap:16px;font-size:12px}body>header .brand img{width:155px}body>header .small-cta{padding:10px 13px}}
+@media(prefers-reduced-motion:reduce){body>header .small-cta{transition:none}body>header .small-cta:hover,body>header .small-cta:focus-visible{transform:none}}
+/* Terra's artwork has wider internal margins; match its visual weight to the ribbon. */
+.logos img[src$="/terra.png"],.ribbon-track img[src$="/terra.png"]{transform:scale(1.65);transform-origin:center}
